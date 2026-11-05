@@ -1,0 +1,60 @@
+
+.parent-section {
+    width: 85%;
+    margin: auto;
+}
+
+.form-section {
+    margin-top: 30px;
+    width: 80%;
+}
+
+.form-section h2 {
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.form-section label {
+    display: block;
+    margin-bottom: 8px;
+    margin-top: 15px;
+}
+
+.form-section input,
+.form-section textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+}
+
+.form-section textarea {
+    resize: vertical;
+}
+
+.form-buttons {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.save-button {
+    background-color: #087bff;
+    color: white;
+    border: none;
+    padding: 8px 13px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cancel-button {
+    background-color: #6c757d;
+    color: white;
+    text-decoration: none;
+    padding: 8px 13px;
+    border-radius: 5px;
+}

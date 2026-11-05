@@ -1,0 +1,105 @@
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My To-Do List</title>
+    <link rel="stylesheet" href="{% static 'navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'home.css' %}">
+</head>
+
+<body>
+
+    {% include 'navbar.html' %}
+
+    <div class="parent-section">
+
+        <div class="task-bar">
+            <h1>All Tasks</h1>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Done</th>
+                        <th>Created</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for task in data %}
+                    <tr class="{% if task.done %}completed{% else %}pending{% endif %}">
+
+                        <td>{{ task.title }}</td>
+
+                        <td>{{ task.description }}</td>
+
+                        <td>
+                            {% if task.done %}
+                                <span class="status completed-status">
+                                    ✓ Completed
+                                </span>
+                            {% else %}
+                                <span class="status pending-status">
+                                    Pending
+                                </span>
+                            {% endif %}
+                        </td>
+
+                        <td>{{ task.created|date:"d M Y" }}</td></td>
+
+                        <td class="actions">
+
+                            <a href="{% url 'edit_task' task.id %}"
+                               class="edit-button">
+                                Edit
+                            </a>
+
+                            <form action="{% url 'toggle_task' task.id %}"
+                                  method="POST">
+                                {% csrf_token %}
+
+                                <button type="submit"
+                                        class="complete-button">
+                                    {% if task.done %}
+                                        Mark Pending
+                                    {% else %}
+                                        Mark Completed
+                                    {% endif %}
+                                </button>
+                            </form>
+
+                            <form action="{% url 'delete_task' task.id %}"
+                                  method="POST">
+                                {% csrf_token %}
+
+                                <button type="submit"
+                                        class="delete-button">
+                                    Delete
+                                </button>
+                            </form>
+
+                        </td>
+                    </tr>
+
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" class="empty-message">
+                            No tasks yet. Add your first task!
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
